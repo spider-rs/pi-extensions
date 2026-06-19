@@ -1,5 +1,5 @@
 {
-	"name": "@spider/pi-spider-tools",
+	"name": "@spider-cloud/pi-spider-tools",
 	"version": "0.1.0",
 	"description": "Pi extension that exposes Spider Cloud scraping, crawling, search, and browser automation tools.",
 	"type": "module",

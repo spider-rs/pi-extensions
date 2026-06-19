@@ -6,7 +6,7 @@ A collection of extensions for the [Pi coding agent](https://pi.dev) — native 
 
 | Pi extension | What it adds | Install |
 | --- | --- | --- |
-| [pi-spider-tools](./extensions/pi-spider-tools) | 🕷 [Spider Cloud](https://spider.cloud) web scraping, crawling, search, and remote browser automation as native Pi tools | `pi install npm:@spider/pi-spider-tools` |
+| [pi-spider-tools](./extensions/pi-spider-tools) | 🕷 [Spider Cloud](https://spider.cloud) web scraping, crawling, search, and remote browser automation as native Pi tools | `pi install npm:@spider-cloud/pi-spider-tools` |
 
 > More extensions will be added here over time. Each lives in its own directory under
 > `extensions/` and is self-contained.
@@ -18,11 +18,11 @@ globally:
 
 ```bash
 # install for everyday use (adds it to ~/.pi/agent/settings.json)
-pi install npm:@spider/pi-spider-tools
+pi install npm:@spider-cloud/pi-spider-tools
 pi list
 
 # or try it for a single session without installing
-pi -e npm:@spider/pi-spider-tools
+pi -e npm:@spider-cloud/pi-spider-tools
 ```
 
 Working from a local clone of this repo instead? Install by path:

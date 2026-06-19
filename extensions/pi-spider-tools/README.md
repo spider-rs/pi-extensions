@@ -84,11 +84,11 @@ Pi started from this directory then sees the key automatically. (Or, always on:
 
 ```bash
 # install from npm (registers both tiers from package.json)
-pi install npm:@spider/pi-spider-tools
+pi install npm:@spider-cloud/pi-spider-tools
 pi list
 
 # or try it for a single session without installing
-pi -e npm:@spider/pi-spider-tools
+pi -e npm:@spider-cloud/pi-spider-tools
 ```
 
 ### From a local clone (development)
