@@ -1,6 +1,6 @@
 {
 	"name": "@spider-cloud/pi-spider-tools",
-	"version": "0.1.0",
+	"version": "0.2.0",
 	"description": "Pi extension that exposes Spider Cloud scraping, crawling, search, and browser automation tools.",
 	"type": "module",
 	"license": "MIT",

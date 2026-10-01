@@ -64,7 +64,6 @@ const SPIDER_TOOL_NAMES = [
 	"spider_search",
 	"spider_links",
 	"spider_screenshot",
-	"spider_unblocker",
 	"spider_transform",
 	"spider_get_credits",
 ] as const;
@@ -364,6 +363,7 @@ const scrapeTool = defineTool({
 	promptSnippet: "Scrape one URL through Spider Cloud",
 	promptGuidelines: [
 		"Use spider_scrape for a single page; use spider_crawl to follow links across a site.",
+		"If a page is blocked by anti-bot protection, retry with stealth: true and proxy_enabled: true.",
 		"If SPIDER_API_KEY is missing, report the configuration error instead of retrying.",
 	],
 	parameters: Type.Object({
@@ -378,6 +378,9 @@ const scrapeTool = defineTool({
 		),
 		proxy_enabled: Type.Optional(
 			Type.Boolean({ description: "Route the request through Spider's premium proxies." }),
+		),
+		stealth: Type.Optional(
+			Type.Boolean({ description: "Use stealth mode for pages behind anti-bot protection." }),
 		),
 		cache: Type.Optional(
 			Type.Boolean({ description: "Allow Spider to serve a cached response when available." }),
@@ -525,32 +528,6 @@ const screenshotTool = defineTool({
 	},
 });
 
-const unblockerTool = defineTool({
-	name: "spider_unblocker",
-	label: "Spider: Unblocker",
-	description:
-		"Fetch content from sites protected by anti-bot systems using Spider's stealth unblocker.",
-	promptSnippet: "Bypass anti-bot protection through Spider Cloud",
-	promptGuidelines: [
-		"Use spider_unblocker only when a normal scrape is blocked; it costs more.",
-		"If SPIDER_API_KEY is missing, report the configuration error instead of retrying.",
-	],
-	parameters: Type.Object({
-		url: Type.String({ description: "The URL to fetch through the unblocker." }),
-		return_format: ReturnFormat,
-		proxy_enabled: Type.Optional(
-			Type.Boolean({ description: "Route through Spider's premium proxies." }),
-		),
-	}),
-	renderResult: renderSpiderResult,
-	async execute(_toolCallId, params, signal, _onUpdate, ctx) {
-		return withStatus(ctx, "🕷 spider unblocker", async () => {
-			const payload = await spiderRequest("POST", "/unblocker", cleanObject(params), signal);
-			return spiderResult(payload);
-		});
-	},
-});
-
 const transformTool = defineTool({
 	name: "spider_transform",
 	label: "Spider: Transform",
@@ -611,7 +588,6 @@ const SPIDER_TOOLS = [
 	searchTool,
 	linksTool,
 	screenshotTool,
-	unblockerTool,
 	transformTool,
 	getCreditsTool,
 ] as const;
@@ -668,7 +644,7 @@ const HELP_TEXT = [
 	"Optionally set SPIDER_API_URL to override the API base URL.",
 	"",
 	"Tools: spider_scrape, spider_crawl, spider_search, spider_links,",
-	"spider_screenshot, spider_unblocker, spider_transform, spider_get_credits.",
+	"spider_screenshot, spider_transform, spider_get_credits.",
 	"",
 	"Commands: /spider status | tools | enable | disable | help",
 ].join("\n");
